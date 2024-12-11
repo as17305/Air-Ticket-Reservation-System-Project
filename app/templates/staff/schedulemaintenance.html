@@ -1,0 +1,47 @@
+{% extends "staff/nav.html" %}
+
+{% block body %}
+    <h1>Schedule Maintenance</h1>
+
+    {% if message and "error" not in message %}
+        <div style="color: green;">
+            <strong>Success:</strong> {{ message }}
+        </div>
+    {% endif %}
+
+    {% if message and "error" in message %}
+        <div style="color: red;">
+            <strong>Error:</strong> {{ message }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <div>
+            <label for="ID">Airplane ID:</label>
+            <input type="text" id="ID" name="ID" required>
+        </div>
+
+        <div>
+            <label for="maintenance_start_date">Maintenance Start Date:</label>
+            <input type="date" id="maintenance_start_date" name="maintenance_start_date" required>
+        </div>
+
+        <div>
+            <label for="maintenance_start_time">Maintenance Start Time:</label>
+            <input type="time" id="maintenance_start_time" name="maintenance_start_time" required>
+        </div>
+
+        <div>
+            <label for="maintenance_end_date">Maintenance End Date:</label>
+            <input type="date" id="maintenance_end_date" name="maintenance_end_date" required>
+        </div>
+
+        <div>
+            <label for="maintenance_end_time">Maintenance End Time:</label>
+            <input type="time" id="maintenance_end_time" name="maintenance_end_time" required>
+        </div>
+
+        <button type="submit">Schedule Maintenance</button>
+    </form>
+
+{% endblock %}

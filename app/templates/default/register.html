@@ -1,0 +1,29 @@
+{% extends "default/nav.html" %}
+
+{% block body %}
+    <h1>Register as Customer</h1>
+    <form action="/registerAuthCustomer" method="POST" id="register">
+        <input type="text" name = "email" placeholder="username" required/> </br>
+        <input type="password" name = "password" placeholder="password" required/></br>
+        <input type="text" name = "first_name" placeholder="first name" required/> </br>
+        <input type="text" name = "last_name" placeholder="last name" required/> </br>
+        <input type="number" name = "addr_building_number" placeholder="building number" required/> </br>
+        <input type="text" name = "addr_street" placeholder="street" required/> </br>
+        <input type="number" name = "addr_apartment_number" placeholder="apt number" required/> </br>
+        <input type="text" name = "addr_city" placeholder="city" required/> </br>
+        <input type="text" name = "addr_state" placeholder="state" required/> </br>
+        <input type="text" name = "zip" placeholder="zip" required/> </br>
+        <input type="number" name = "passport_number" placeholder="passport number" required/> </br>
+        <input type="date" name = "passport_expiration" placeholder="passport expiration" required/> </br>
+        <input type="text" name = "passport_country" placeholder="passport country" required/> </br>
+        <input type="date" name = "date_of_birth" placeholder="date of birth" required/> </br>
+        <h3>Enter your phone numbers (at least 1), comma separated</h3>
+        <textarea form="register" maxlength="200" name="phone_numbers" required></textarea>
+        <br/>
+
+        <input type="submit" value = Register />
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+    </form>
+{% endblock %}

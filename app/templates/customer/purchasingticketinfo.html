@@ -1,0 +1,51 @@
+{% extends "customer/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Please provide passenger info (first name, last name, DOB) for each ticket</h1>
+    <form action="/customer/submitpurchase" method="POST">
+        <table>
+            <th>Airline</th>
+            <th>Flight Number</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Price</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+        
+        {% for flight in flights %}
+            <tr>
+                <td>{{flight['airline_name']}}</td>
+                <td>{{flight['flight_number']}}</td>
+                <td>{{flight['departure_date']}}</td>
+                <td>{{flight['departure_time']}}</td>
+                <td>{{flight['price']}}</td>
+                <td><input type="text" name="{{flight['airline_name'] + ',' + flight['flight_number']|string() + ',' + flight['departure_date']|string() + ',' + flight['departure_time']|string()}}/first_name" required></td>
+                <td><input type="text" name="{{flight['airline_name'] + ',' + flight['flight_number']|string() + ',' + flight['departure_date']|string() + ',' + flight['departure_time']|string()}}/last_name" required></td>
+                <td><input type="date" name="{{flight['airline_name'] + ',' + flight['flight_number']|string() + ',' + flight['departure_date']|string() + ',' + flight['departure_time']|string()}}/date_of_birth" required></td>
+            </tr>
+        {% endfor %}
+        </table>
+        
+        <h1>Please provide payment information</h1>
+        <!-- <p>Email</p>
+        <input type="text" name="email" placeholder="email" required/><br/> -->
+        <p>Card Type</p>
+        <input type="radio" name="type" value="credit" required/>credit<br/>
+        <input type="radio" name="type" value="debit" required/>debit<br/>
+        <p>Card Number</p>
+        <input type="numeric" name="card-number" placeholder="card number" required/>
+        <p>Name on Card</p>
+        <input type="text" name="card-name" placeholder="name on card" required/>
+        <p>Card Expiration</p>
+        <input type="date" name="card-expiration" placeholder="card expiration" required/>
+        <br/><br/>
+        <h1>Click Below to Confirm Purchase</h1>
+        <input type="submit" value="Confirm Purchase"/>
+    </form>
+{% endblock %}

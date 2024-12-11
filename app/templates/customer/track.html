@@ -1,0 +1,31 @@
+{% extends "customer/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Track My Spending</h1>
+    <h2>Total money spent in the past year (365 days ago from now): {{yearly}}</h2>
+    <h2>Spending of the Last 6 Months</h2>
+    <table>
+        <th>Month</th>
+        <th>Spending</th>
+    
+    {% for item, spending in monthly %}
+        <tr>
+            <td>{{item[0]}} {{item[1]}}</td>
+            <td>{{spending}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <form action="/customer/trackrange" method="POST">
+        <h3>View time range</h3>
+        <p>Start Range</p>
+        <input type="date" name = "start" required/> </br>
+        <p>End Range</p>
+        <input type="date" name = "end" required/> </br>
+        <input type="submit" value = View />
+    </form>
+{% endblock %}

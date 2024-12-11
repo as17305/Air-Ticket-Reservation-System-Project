@@ -1,0 +1,24 @@
+{% extends "customer/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Rate and Comment on Flight</h1>
+    <h2>Flight Number: {{comment['flight_number']}}</h2>
+    <h2>Departure Date: {{comment['departure_date']}}</h2>
+    <h2>Departure Time: {{comment['departure_time']}}</h2>
+
+    <br/>
+    
+    <h3>Rating Out of 10: {{comment['rating']}}</h3>
+
+    <br/>
+
+    <h3>Posted Comment:</h3>
+    <p>{{comment['comment']}}</p>
+
+    <br/>
+{% endblock %}

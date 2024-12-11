@@ -1,0 +1,21 @@
+{% extends "default/nav.html" %}
+
+{% block body %}
+    <h1>Search for Flight Using Source & Destination Airport Codes.</h1>
+    <h2>Departure date is required</h2>
+    <h2>Return date to view round trips</h2>
+    <form action="/searchflights" method="POST">
+        <p>departure airport code</p>
+        <input type="text" name = "src-airport" placeholder="JFK" required/> </br>
+        <p>arrival airport code</p>
+        <input type="text" name = "dst-airport" placeholder="LAX" required/></br>
+        <p>departure date</p>
+        <input type="date" name = "departure-date" required/></br>
+        <p>return date</p>
+        <input type="date" name = "return-date"/></br>
+        <input type="submit" value = Search />
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+    </form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "customer/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Track My Spending</h1>
+    <h2>Total money spent from {{range_start}} to {{range_end}} by Month</h2>
+    <table>
+        <th>Month</th>
+        <th>Spending</th>
+    
+    {% for month, year, spending in monthly %}
+        <tr>
+            <td>{{month}} {{year}}</td>
+            <td>{{spending}}</td>
+        </tr>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "staff/nav.html" %}
+
+{% block body %}
+    <h1>Update Flight Status</h1>
+
+    {% if message and "!" not in message %}
+        <div style="color: green;">
+            <strong>Success:</strong> {{ message }}
+        </div>
+    {% endif %}
+
+    {% if message and "!" in message %}
+        <div style="color: red;">
+            <strong>Error:</strong> {{ message }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <div>
+            <label for="flight_number">Flight Number:</label>
+            <input type="text" id="flight_number" name="flight_number" required>
+        </div>
+
+        <div>
+            <label for="departure_date">Departure Date:</label>
+            <input type="date" id="departure_date" name="departure_date" required>
+        </div>
+
+        <div>
+            <label for="departure_time">Departure Time:</label>
+            <input type="time" id="departure_time" name="departure_time" required>
+        </div>
+
+        <div>
+            <label for="new_status">New Flight Status:</label>
+            <select id="new_status" name="new_status" required>
+                <option value="">Select New Status</option>
+                <option value="on time">on time</option>
+                <option value="delayed">delayed</option>
+                <option value="canceled">canceled</option>
+            </select>
+        </div>
+
+        <button type="submit">Update Flight Status</button>
+    </form>
+
+{% endblock %}

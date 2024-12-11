@@ -1,0 +1,20 @@
+{% extends "staff/nav.html" %}
+
+{% block body %}
+    <h1>Earned Revenue</h1>
+
+    <div>
+        <h3>Total Revenue from Ticket Sales</h3>
+
+        <div>
+            <h4>Last Month:</h4>
+            <p>${{ revenue_last_month }}</p>
+        </div>
+
+        <div>
+            <h4>Last Year:</h4>
+            <p>${{ revenue_last_year }}</p>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "staff/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+
+    <h1>View Flights</h1>
+
+    <form method="POST" style="margin-bottom: 20px;">
+        <div>
+            <label for="departure_code">Source Airport (Code):</label>
+            <select id="departure_code" name="departure_code">
+                <option value="">Select Departure Airport</option>
+                {% for code in airport_codes %}
+                    <option value="{{ code }}">{{ code }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="arrival_code">Destination Airport (Code):</label>
+            <select id="arrival_code" name="arrival_code">
+                <option value="">Select Arrival Airport</option>
+                {% for code in airport_codes %}
+                    <option value="{{ code }}">{{ code }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="departure_date">Minimum Departure Date:</label>
+            <input type="date" id="departure_date" name="departure_date" value="{{ start_date }}" required>
+        </div>
+
+        <div>
+            <label for="max_departure_date">Maximum Departure Date:</label>
+            <input type="date" id="max_departure_date" name="max_departure_date" value="{{ end_date }}" required>
+        </div>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <hr>
+
+    {% if not source_airport and not destination_airport and not start_date and not end_date %}
+        <h2>Default Flights (Next 30 Days)</h2>
+        {% if default_flight_details %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Airline</th>
+                        <th>Flight Number</th>
+                        <th>Departure Date</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Date</th>
+                        <th>Arrival Time</th>
+                        <th>Base Price</th>
+                        <th>Flight Status</th>
+                        <th>Departure Code</th>
+                        <th>Arrival Code</th>
+                        <th>Customers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in default_flight_details %}
+                        <tr>
+                            <td>{{ detail['flight']['airline_name'] }}</td>
+                            <td>{{ detail['flight']['flight_number'] }}</td>
+                            <td>{{ detail['flight']['departure_date'] }}</td>
+                            <td>{{ detail['flight']['departure_time'] }}</td>
+                            <td>{{ detail['flight']['arrival_date' ]}}</td>
+                            <td>{{ detail['flight']['arrival_time'] }}</td>
+                            <td>{{ detail['flight']['base_price'] }}</td>
+                            <td>{{ detail['flight']['flight_status'] }}</td>
+                            <td>{{ detail['flight']['departure_code'] }}</td>
+                            <td>{{ detail['flight']['arrival_code'] }}</td>
+                            <td>
+                                <ul>
+                                    {% for customer in detail['customers'] %}
+                                        <li>{{ customer['first_name'] }} {{ customer['last_name'] }} ({{ customer['customer_email'] }})</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No flights found for the next 30 days.</p>
+        {% endif %}
+    {% endif %}
+
+    <hr>
+
+    {% if source_airport or destination_airport or start_date or end_date %}
+        <h2>Filtered Flights</h2>
+        {% if flight_details %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Airline</th>
+                        <th>Flight Number</th>
+                        <th>Departure Date</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Date</th>
+                        <th>Arrival Time</th>
+                        <th>Base Price</th>
+                        <th>Flight Status</th>
+                        <th>Departure Code</th>
+                        <th>Arrival Code</th>
+                        <th>Customers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in flight_details %}
+                        <tr>
+                            <td>{{ detail['flight']['airline_name'] }}</td>
+                            <td>{{ detail['flight']['flight_number'] }}</td>
+                            <td>{{ detail['flight']['departure_date'] }}</td>
+                            <td>{{ detail['flight']['departure_time'] }}</td>
+                            <td>{{ detail['flight']['arrival_date' ]}}</td>
+                            <td>{{ detail['flight']['arrival_time'] }}</td>
+                            <td>{{ detail['flight']['base_price'] }}</td>
+                            <td>{{ detail['flight']['flight_status'] }}</td>
+                            <td>{{ detail['flight']['departure_code'] }}</td>
+                            <td>{{ detail['flight']['arrival_code'] }}</td>
+                            <td>
+                                <ul>
+                                    {% for customer in detail['customers'] %}
+                                        <li>{{ customer['first_name'] }} {{ customer['last_name'] }} ({{ customer['customer_email'] }})</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No flights found matching your criteria.</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

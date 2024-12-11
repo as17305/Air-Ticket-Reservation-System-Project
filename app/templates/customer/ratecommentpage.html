@@ -1,0 +1,29 @@
+{% extends "customer/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Rate and Comment on Flight</h1>
+    <h2>Flight Number: {{flight['flight_number']}}</h2>
+    <h2>Departure Date: {{flight['departure_date']}}</h2>
+    <h2>Departure Time: {{flight['departure_time']}}</h2>
+    <form action="/customer/submitrating/{{flight['code']}}" method="POST" id="ratingform">
+        <h3>Rating Out of 10</h3>
+        {% for i in range(10) %}
+            <input type="radio" name="rating" value="{{i + 1}}" required/>
+            <label>{{i + 1}}</label>
+        {% endfor %}
+
+        <br/>
+
+        <h3>Leave a comment</h3>
+        <textarea form="ratingform" maxlength="200" name="comment"></textarea>
+
+        <br/>
+
+        <input type="submit" value = "Submit Rating and Comment" />
+    </form>
+{% endblock %}

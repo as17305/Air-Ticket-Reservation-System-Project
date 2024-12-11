@@ -1,0 +1,67 @@
+{% extends "staff/nav.html" %}
+
+{% block body %}
+    <h1>Frequent Customers</h1>
+
+
+    <form method="POST" style="margin-bottom: 20px;">
+        <div>
+            <label for="customer_email">Customer Email:</label>
+            <input type="email" id="customer_email" name="customer_email" value="{{ customer_email }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Query Flights</button>
+    </form>
+
+    <hr>
+
+    <h3>Most Frequent Customers in the Last Year</h3>
+    {% if frequent %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Number of Flights</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in frequent %}
+                    <tr>
+                        <td>{{ customer['customer_email'] }}</td>
+                        <td>{{ customer['num_of_flights'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            No frequent customers found last year
+        </div>
+    {% endif %}
+
+    {% if flights %}
+        <h3>Flights Bought by {{ customer_email }}</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Departure Date</th>
+                    <th>Departure Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for flight in flights %}
+                    <tr>
+                        <td>{{ flight['flight_number'] }}</td>
+                        <td>{{ flight['departure_date'] }}</td>
+                        <td>{{ flight['departure_time'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {% if customer_email %}
+            <p>No flights found for the given customer.</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

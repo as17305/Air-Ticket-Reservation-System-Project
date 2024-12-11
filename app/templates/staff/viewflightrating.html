@@ -1,0 +1,50 @@
+{% extends "staff/nav.html" %}
+
+{% block body %}
+    <h1>View Flight Ratings</h1>
+
+    <form method="POST" style="margin-bottom: 20px;">
+        <div>
+            <label for="flight_number">Flight Number:</label>
+            <input type="text" id="flight_number" name="flight_number" value="{{ flight_number }}" required>
+        </div>
+
+        <div>
+            <label for="departure_date">Departure Date:</label>
+            <input type="date" id="departure_date" name="departure_date" value="{{ departure_date }}" required>
+        </div>
+
+        <div>
+            <label for="departure_time">Departure Time:</label>
+            <input type="time" id="departure_time" name="departure_time" value="{{ departure_time }}" required>
+        </div>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <hr>
+
+    {% if data %}
+        <h3>Flight Ratings</h3>
+        <p><strong>Average Rating:</strong> {{ avgRating['value'] }}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td>{{ row['rating'] }}</td>
+                        <td>{{ row['comment'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No ratings found for the selected flight.</p>
+    {% endif %}
+
+{% endblock %}

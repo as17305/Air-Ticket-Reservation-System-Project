@@ -1,0 +1,69 @@
+{% extends "default/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Your Search Results</h1>
+    <h2>Flights to Your Destination</h2>
+    <table>
+        <th>Airline</th>
+        <th>Flight Number</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Arrival Date</th>
+        <th>Arrival Time</th>
+        <th>Base Price</th>
+        <th>Flight Status</th>
+        <th>Depature Code</th>
+        <th>Arrival Code</th>
+    
+    {% for flight in dest_data %}
+        <tr>
+            <td>{{flight['airline_name']}}</td>
+            <td>{{flight['flight_number']}}</td>
+            <td>{{flight['departure_date']}}</td>
+            <td>{{flight['departure_time']}}</td>
+            <td>{{flight['arrival_date']}}</td>
+            <td>{{flight['arrival_time']}}</td>
+            <td>{{flight['base_price']}}</td>
+            <td>{{flight['flight_status']}}</td>
+            <td>{{flight['departure_code']}}</td>
+            <td>{{flight['arrival_code']}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    {% if round_trip %}
+        <h2>Return Flights</h2>
+        <table>
+            <th>Airline</th>
+            <th>Flight Number</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Arrival Date</th>
+            <th>Arrival Time</th>
+            <th>Base Price</th>
+            <th>Flight Status</th>
+            <th>Depature Code</th>
+            <th>Arrival Code</th>
+        
+        {% for flight in return_data %}
+            <tr>
+                <td>{{flight['airline_name']}}</td>
+                <td>{{flight['flight_number']}}</td>
+                <td>{{flight['departure_date']}}</td>
+                <td>{{flight['departure_time']}}</td>
+                <td>{{flight['arrival_date']}}</td>
+                <td>{{flight['arrival_time']}}</td>
+                <td>{{flight['base_price']}}</td>
+                <td>{{flight['flight_status']}}</td>
+                <td>{{flight['departure_code']}}</td>
+                <td>{{flight['arrival_code']}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

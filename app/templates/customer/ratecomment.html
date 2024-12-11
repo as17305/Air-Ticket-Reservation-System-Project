@@ -1,0 +1,53 @@
+{% extends "customer/nav.html" %}
+
+{% block body %}
+    <style type="text/css">
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Give Ratings and Comment on Previous Flights</h1>
+        <table>
+            <th>Airline</th>
+            <th>Flight Number</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Arrival Date</th>
+            <th>Arrival Time</th>
+            <th>Base Price</th>
+            <th>Flight Status</th>
+            <th>Departure Code</th>
+            <th>Arrival Code</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Comment</th>
+        
+        {% for flight in data %}
+            <tr>
+                <td>{{flight['airline_name']}}</td>
+                <td>{{flight['flight_number']}}</td>
+                <td>{{flight['departure_date']}}</td>
+                <td>{{flight['departure_time']}}</td>
+                <td>{{flight['arrival_date']}}</td>
+                <td>{{flight['arrival_time']}}</td>
+                <td>{{flight['base_price']}}</td>
+                <td>{{flight['flight_status']}}</td>
+                <td>{{flight['departure_code']}}</td>
+                <td>{{flight['arrival_code']}}</td>
+                <td>{{flight['first_name']}}</td>
+                <td>{{flight['last_name']}}</td>
+                <td>
+                    {% if (flight['airline_name'], flight['flight_number'], flight['departure_date'], flight['departure_time']) in flights_with_comments %}
+                    <a href="/customer/viewratecomment/{{flight['code']}}">
+                        <button>View Comment</button>
+                    </a>
+                    {% else %}
+                    <a href="/customer/ratecomment/{{flight['code']}}">
+                        <button>Comment</button>
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+{% endblock %}
